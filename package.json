@@ -9,12 +9,27 @@
     "email": "lindsey@phparadox.com",
     "url": "http://praxx.is"
   },
-  "scripts": {},
+  "scripts": {
+    "generate-item-cache": "ts-node bin/generate-item-cache.ts",
+    "generate-items": "ts-node bin/generate-items.ts"
+  },
   "dependencies": {
+    "@types/async": "^3.2.3",
+    "async": "^3.2.0",
+    "async-file": "^2.0.2",
+    "axios": "^0.19.2",
+    "csv-parse": "^4.11.1",
+    "get-stdin": "^8.0.0",
+    "get-stream": "^5.1.0",
+    "lodash.find": "^4.6.0",
     "meow": "^5.0.0"
   },
   "devDependencies": {
+    "@types/get-stdin": "^7.0.0",
+    "@types/get-stream": "^3.0.2",
+    "@types/lodash.find": "^4.6.6",
     "@types/meow": "^5.0.0",
+    "@types/node": "^14.0.26",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
