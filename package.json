@@ -1,39 +1,22 @@
 {
-	"name": "unicorn-fun-cli",
-	"version": "0.0.0",
-	"description": "My awesome command-line tool",
-	"license": "MIT",
-	"repository": "YOUR-GITHUB-USERNAME/unicorn-fun-cli",
-	"author": {
-		"name": "YOUR NAME",
-		"email": "YOUR EMAIL",
-		"url": "YOUR WEBSITE"
-	},
-	"bin": {
-		"unicorn-fun": "cli.js"
-	},
-	"engines": {
-		"node": ">=8"
-	},
-	"scripts": {
-		"test": "xo && ava"
-	},
-	"files": [
-		"cli.js"
-	],
-	"keywords": [
-		"cli",
-		"cli-app",
-		"unicorn",
-		"fun"
-	],
-	"dependencies": {
-		"meow": "^5.0.0",
-		"unicorn-fun": "^0.0.0"
-	},
-	"devDependencies": {
-		"ava": "^2.1.0",
-		"execa": "^2.0.0",
-		"xo": "^0.24.0"
-	}
+  "name": "ksk-lootlist-generator",
+  "version": "0.0.1",
+  "description": "A tool to help creating KSK lists",
+  "license": "MIT",
+  "repository": "praxxis/ksk-lootlist-generator",
+  "author": {
+    "name": "Lindsey Smith",
+    "email": "lindsey@phparadox.com",
+    "url": "http://praxx.is"
+  },
+  "scripts": {},
+  "dependencies": {
+    "meow": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/meow": "^5.0.0",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
 }
