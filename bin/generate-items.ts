@@ -3,10 +3,11 @@ import ItemCache, {ItemApiResponse} from '../lib/itemCache';
 import parse from 'csv-parse/lib/sync';
 import * as getStream from 'get-stream';
 import * as fs from 'async-file';
-import getStdin from 'get-stdin';
 import path from 'path';
 import {mapSeries} from 'async';
 import {classify} from '../lib/classify';
+import {KskValues, KskTable} from '../lib/types';
+import {toLua} from '../lib/toLua';
 
 const cli = meow(``, {
   flags: {
@@ -23,15 +24,10 @@ const cli = meow(``, {
     listIds: {
       type: 'string',
       required: true,
+      example: 'A=2007244019ab86,B=200724d9fbcd87,C=20072418751247',
     },
   },
 });
-
-interface Output {
-  cfliter: string;
-  ilink: string;
-  list: string;
-}
 
 (async () => {
   const cacheFile = path.join(__dirname, '../', cli.flags.cacheFile);
@@ -41,20 +37,20 @@ interface Output {
   const existingCache: Record<string, ItemApiResponse> = JSON.parse(data.toString());
   const itemCache = new ItemCache(existingCache);
 
+  const listMappings: Record<string, string> = (cli.flags.listIds as string)
+    .split(',')
+    .reduce((memo, l: string) => {
+      const [name, id] = l.split('=');
+      return {...memo, [name]: id};
+    }, {});
+
   const lootData = await fs.readFile(lootFile);
   const records: Record<string, string>[] = parse(lootData, {
     columns: ['list', 'name'],
     relax_column_count: true,
   });
 
-  const listMappings: Record<string, string> = (cli.flags.listIds as string)
-    .split(',')
-    .reduce((memo, l: string) => {
-      const mapping = l.split('=');
-      return {...memo, [mapping[0]]: mapping[1]};
-    }, {});
-
-  const mapped: [string, Output][] = await mapSeries(records, async ({list, name}) => {
+  const mapped: [string, KskValues][] = await mapSeries(records, async ({list, name}) => {
     if (!listMappings[list]) {
       return [];
     }
@@ -72,7 +68,7 @@ interface Output {
     ];
   });
 
-  const items: Record<string, Output> = mapped
+  const items: KskTable = mapped
     .filter((m) => m.length > 0)
     .reduce((memo, [itemId, item]) => {
       return {
@@ -82,7 +78,7 @@ interface Output {
     }, {});
 
   if (Object.keys(items).length > 0) {
-    const output = JSON.stringify(items);
+    const output = toLua(items);
     console.log(output);
   }
 })();

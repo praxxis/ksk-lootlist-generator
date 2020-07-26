@@ -22,12 +22,16 @@
     "get-stdin": "^8.0.0",
     "get-stream": "^5.1.0",
     "lodash.find": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.trimend": "^4.5.1",
     "meow": "^5.0.0"
   },
   "devDependencies": {
     "@types/get-stdin": "^7.0.0",
     "@types/get-stream": "^3.0.2",
     "@types/lodash.find": "^4.6.6",
+    "@types/lodash.foreach": "^4.5.6",
+    "@types/lodash.trimend": "^4.5.6",
     "@types/meow": "^5.0.0",
     "@types/node": "^14.0.26",
     "prettier": "^2.0.5",

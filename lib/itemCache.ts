@@ -1,6 +1,5 @@
 import axios from 'axios';
 import find from 'lodash.find';
-import {Classes} from './lib';
 
 export interface ItemApiResponse {
   itemId: number;
