@@ -5,7 +5,7 @@ import * as getStream from 'get-stream';
 import * as fs from 'async-file';
 import path from 'path';
 import {mapSeries} from 'async';
-import {classify} from '../lib/classify';
+import {classify, allClassesBits} from '../lib/classify';
 import {KskValues, KskTable} from '../lib/types';
 import {toLua} from '../lib/toLua';
 
@@ -50,6 +50,8 @@ const cli = meow(``, {
     relax_column_count: true,
   });
 
+  const doubleCheck: string[] = [];
+
   const mapped: [string, KskValues][] = await mapSeries(records, async ({list, name}) => {
     if (!listMappings[list]) {
       return [];
@@ -57,6 +59,10 @@ const cli = meow(``, {
 
     const item = await itemCache.search(name);
     const cfilter = classify(item.tags, item.tooltip);
+
+    if (cfilter === allClassesBits) {
+      doubleCheck.push(item.name);
+    }
 
     return [
       item.itemId,
@@ -80,5 +86,6 @@ const cli = meow(``, {
   if (Object.keys(items).length > 0) {
     const output = toLua(items);
     console.log(output);
+    console.log('Double check these:', doubleCheck.join(', '));
   }
 })();
