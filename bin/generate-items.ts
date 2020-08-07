@@ -86,6 +86,7 @@ const cli = meow(``, {
   if (Object.keys(items).length > 0) {
     const output = toLua(items);
     console.log(output);
-    console.log('Double check these:', doubleCheck.join(', '));
+    console.log('# Number of items added:', Object.keys(items).length);
+    console.log('# Double check these:', doubleCheck.join(', '));
   }
 })();
