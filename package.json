@@ -17,7 +17,7 @@
     "@types/async": "^3.2.3",
     "async": "^3.2.0",
     "async-file": "^2.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "csv-parse": "^4.11.1",
     "get-stdin": "^8.0.0",
     "get-stream": "^5.1.0",
